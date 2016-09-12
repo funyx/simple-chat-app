@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+import { LocalStorageService } from "angular2-localstorage/LocalStorageEmitter";
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -14,6 +15,7 @@ import { ROUTES } from './app.routes';
 import { App } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InteralStateType } from './app.service';
+import { AuthService } from './auth/auth.service';
 import { Home } from './home';
 import { About } from './about';
 import { NoContent } from './no-content';
@@ -22,6 +24,8 @@ import { XLarge } from './home/x-large';
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
+  LocalStorageService,
+  AuthService,
   AppState
 ];
 
@@ -89,4 +93,3 @@ export class AppModule {
   }
 
 }
-

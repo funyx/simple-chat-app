@@ -1,0 +1,50 @@
+<form
+  class="form-signin"
+  #loginForm="ngForm"
+  (ngSubmit)="doLogin(loginForm)">
+  <h2 class="form-signin-heading">Please Login</h2>
+  <label for="identifier" class="sr-only">Email address</label>
+  <input
+    type="text"
+    name="identifier"
+    id="identifier"
+    class="form-control"
+    placeholder="Username or Email address"
+    autofocus
+    autocomplete="off"
+    required minlength="6" maxlength="50"
+    [(ngModel)]="model.identifier" #identifier="ngModel" />
+  <div class="alert alert-danger fade in" role="alert" *ngIf="identifier.touched && identifier.errors">
+      <span *ngIf="identifier.errors.required">
+        Enter username or Email address</span>
+      <span *ngIf="identifier.errors.minlength">
+        Min 6 chars</span>
+      <span *ngIf="identifier.errors.maxlength">
+        Max 50 chars</span>
+  </div>
+  <label for="password" class="sr-only">Password</label>
+  <input
+    type="password"
+    name="password"
+    id="password"
+    class="form-control"
+    placeholder="Password"
+    autocomplete="off"
+    required minlength="6" maxlength="50"
+    #password="ngModel"
+    [(ngModel)]="model.password" />
+  <div class="alert alert-danger fade in" role="alert" *ngIf="password.touched && password.errors">
+    <span *ngIf="password.errors.required">
+      Enter Password</span>
+    <span *ngIf="password.errors.minlength">
+      Min 6 chars</span>
+    <span *ngIf="password.errors.maxlength">
+      Max 50 chars</span>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="autoLogin" [(ngModel)]="model.autoLogin" #autoLogin="ngModel" value="on" /> Auto-login
+    </label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" [disabled]="!loginForm.form.valid" type="submit">Login</button>
+</form>

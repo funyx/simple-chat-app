@@ -7,7 +7,12 @@ import { DataResolver } from './app.resolver';
 
 
 export const ROUTES: Routes = [
-  { path: '',      component: Home },
+  {
+    path: '',
+    redirectTo: '/auth',
+    pathMatch: 'full'
+  },
+  { path: 'auth', loadChildren: () => System.import('./auth') },
   { path: 'home',  component: Home },
   { path: 'about', component: About },
   {
