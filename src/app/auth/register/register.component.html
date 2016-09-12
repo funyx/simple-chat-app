@@ -1,0 +1,113 @@
+<form
+  class="form-register"
+  #registerForm="ngForm"
+  (ngSubmit)="doRegister(registerForm)">
+  <h2 class="form-signin-heading">Please Login</h2>
+  <label for="username" class="sr-only">Username</label>
+  <input
+    type="text"
+    name="username"
+    id="username"
+    class="form-control"
+    placeholder="Username"
+    autofocus
+    autocomplete="off"
+    required minlength="6" maxlength="50"
+    [(ngModel)]="model.username" #username="ngModel" />
+  <div class="alert alert-danger fade in" role="alert" *ngIf="username.touched && username.errors">
+      <span *ngIf="username.errors.required">
+        Enter Username</span>
+      <span *ngIf="username.errors.minlength">
+        Min 6 chars</span>
+      <span *ngIf="username.errors.maxlength">
+        Max 50 chars</span>
+  </div>
+  <label for="email" class="sr-only">Email Address</label>
+  <input
+    type="text"
+    name="email"
+    id="email"
+    class="form-control"
+    placeholder="Email Address"
+    autofocus
+    autocomplete="off"
+    required minlength="6" maxlength="50"
+    [(ngModel)]="model.email" #email="ngModel" />
+  <div class="alert alert-danger fade in" role="alert" *ngIf="email.touched && email.errors">
+      <span *ngIf="email.errors.required">
+        Enter Email Address</span>
+      <span *ngIf="email.errors.minlength">
+        Min 6 chars</span>
+      <span *ngIf="email.errors.maxlength">
+        Max 50 chars</span>
+  </div>
+  <label for="public_name" class="sr-only">Public Name</label>
+  <input
+    type="text"
+    name="public_name"
+    id="public_name"
+    class="form-control"
+    placeholder="Public Name"
+    autofocus
+    autocomplete="off" minlength="3" maxlength="50"
+    [(ngModel)]="model.public_name" #public_name="ngModel" />
+  <div class="alert alert-danger fade in" role="alert" *ngIf="public_name.touched && public_name.errors">
+      <span *ngIf="public_name.errors.minlength">
+        Min 3 chars</span>
+      <span *ngIf="public_name.errors.maxlength">
+        Max 50 chars</span>
+  </div>
+  <label for="password" class="sr-only">Password</label>
+  <input
+    type="password"
+    name="password"
+    id="password"
+    class="form-control"
+    placeholder="Password"
+    autocomplete="off"
+    required minlength="6" maxlength="50"
+    #password="ngModel"
+    [(ngModel)]="model.password" />
+  <div class="alert alert-danger fade in" role="alert" *ngIf="password.touched && password.errors">
+    <span *ngIf="password.errors.required">
+      Enter Password</span>
+    <span *ngIf="password.errors.minlength">
+      Min 6 chars</span>
+    <span *ngIf="password.errors.maxlength">
+      Max 50 chars</span>
+  </div>
+  <div class="form-group" for="confirm_password">
+    <label for="confirm_password" class="sr-only">Confirm Password</label>
+    <input
+      type="password"
+      name="confirm_password"
+      id="confirm_password"
+      class="form-control"
+      placeholder="Confirm Password"
+      autocomplete="off"
+      required minlength="6" maxlength="50"
+      #confirm_password="ngModel"
+      [(ngModel)]="model.confirm_password" />
+    <div class="alert alert-danger fade in" role="alert" *ngIf="confirm_password.touched && confirm_password.errors">
+      <span *ngIf="confirm_password.errors.required">
+        Confirm Password</span>
+      <span *ngIf="confirm_password.errors.minlength">
+        Min 6 chars</span>
+      <span *ngIf="confirm_password.errors.maxlength">
+        Max 50 chars</span>
+    </div>
+    <div class="alert alert-danger fade in" role="alert" *ngIf="confirm_password.touched && confirm_password.value != password.value">
+      <span>
+        Passwords don't match</span>
+    </div>
+  </div>
+  <div class="alert alert-danger fade in" role="alert" *ngIf="registration_error">
+    <div *ngIf="registration_error_code === 'E_VALIDATION' && registration_error_data.username">
+      <span *ngFor="let item of registration_error_data.username;let i = index">{{item.message}}</span>
+    </div>
+    <div *ngIf="registration_error_code === 'E_VALIDATION' && registration_error_data.email">
+      <span *ngFor="let item of registration_error_data.email;let i = index">{{item.message}}</span>
+    </div>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" [disabled]="!registerForm.form.valid" type="submit">Register</button>
+</form>

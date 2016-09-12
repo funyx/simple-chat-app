@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router }       from '@angular/router';
-import { Http, Headers } from '@angular/http';
 import { AuthService } from '../auth.service';
-import { Subscription } from 'rxjs/Subscription';
-// import { LocalStorage, SessionStorage } from "angular2-localstorage/WebStorage";
+import { Storage } from '../../storage.service';
+// import { Subscription } from 'rxjs/Subscription';
 
 import { LoginModel } from './login';
 
@@ -20,7 +19,7 @@ export class Login implements OnInit, OnDestroy {
   public model = new LoginModel('','',false);
   constructor(
     public router: Router,
-    public http: Http,
+    private storage: Storage,
     private service: AuthService
   ) {
   }
@@ -28,13 +27,22 @@ export class Login implements OnInit, OnDestroy {
     event.preventDefault();
     console.log(data,this.model);
     // set autologin if we have success
-    let auth_setup = Object.assign({},this.model);
-    delete auth_setup.password;
-    this.service.save('auth_setup', auth_setup);
+    let auth_data = Object.assign({},this.model);
+    delete auth_data.password;
+    this.service.login(
+      auth_data.identifier,
+      auth_data.password,
+      auth_data.autoLogin
+    ).then((login_resp)=>{
+      console.log(login_resp);
+    },(error)=>{console.log(error);alert(error.error_msg)});
+    this.storage.save('auth_data', auth_data);
   }
   ngOnInit() {
-    let auth_setup = this.service.get('auth_setup');
-    if(auth_setup.autoLogin) this.service.autoLogin(auth_setup.identifier)
+    // let auth_setup = this.storage.get('auth_data');
+    // // login if we have auto-login
+    // // if(auth_setup.autoLogin) this.service.autoLogin(auth_setup.identifier)
+    // alert('You will be auto-logged in');
   }
 
   ngOnDestroy() {

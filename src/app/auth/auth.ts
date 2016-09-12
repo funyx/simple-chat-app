@@ -34,20 +34,20 @@ describe('Auth', () => {
     ]
   }));
 
-  it('should have default data', inject([ Auth ], (auth: Auth) => {
-    expect(auth.localState).toEqual({ value: '' });
-  }));
+  // it('should have default data', inject([ Auth ], (auth: Auth) => {
+  //   expect(auth.localState).toEqual({ value: '' });
+  // }));
+  //
+  // it('should have a title', inject([ Auth ], (auth: Auth) => {
+  //   expect(!!auth.title).toEqual(true);
+  // }));
 
-  it('should have a title', inject([ Auth ], (auth: Auth) => {
-    expect(!!auth.title).toEqual(true);
-  }));
-
-  it('should log ngOnInit', inject([ Auth ], (auth: Auth) => {
-    spyOn(console, 'log');
-    expect(console.log).not.toHaveBeenCalled();
-
-    auth.ngOnInit();
-    expect(console.log).toHaveBeenCalled();
-  }));
+  // it('should log ngOnInit', inject([ Auth ], (auth: Auth) => {
+  //   spyOn(console, 'log');
+  //   expect(console.log).not.toHaveBeenCalled();
+  //
+  //   auth.ngOnInit();
+  //   expect(console.log).toHaveBeenCalled();
+  // }));
 
 });

@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
   template: `<h1 class="cover-heading">Simple Chat App</h1>
     <p class="lead">..welcome..make a choice</p>
     <p class="lead">
-      <button class="btn btn-sm btn-primary">Login</button>
-      <button class="btn btn-sm btn-primary">Register</button>
+      <button routerLink="/auth/login" class="btn btn-sm btn-primary">Login</button>
+      <button routerLink="/auth/register" class="btn btn-sm btn-primary">Register</button>
     </p>`
   ,
 })
