@@ -1,0 +1,8 @@
+{
+  "name": "Simple Chat",
+  "version": "1.0.0",
+  "description": "An Angular 2 Webpack Starter kit featuring Angular 2 (Router, Http, Forms, Services, Tests, E2E, Coverage), Karma, Protractor, Jasmine, Istanbul, TypeScript, Webpack, Electron, Bootstrap@4",
+  "main": "electronApp.js",
+  "homepage": "https://github.com/funyx/simple-chat-app",
+  "license": "MIT" 
+}

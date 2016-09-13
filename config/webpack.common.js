@@ -250,6 +250,10 @@ module.exports = function(options) {
         {
           from: 'src/electronApp.js',
           to: 'electronApp.js'
+        },
+        {
+          from: 'src/package.json',
+          to: 'package.json'
         }
       ]),
 
