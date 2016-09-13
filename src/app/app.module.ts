@@ -14,6 +14,7 @@ import { ROUTES } from './app.routes';
 import { App } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InteralStateType } from './app.service';
+import { AuthGuard } from './auth.guard';
 import { Io } from './socket.service';
 import { Storage } from './storage.service';
 import { AuthService } from './auth/auth.service';
@@ -26,6 +27,7 @@ import { XLarge } from './home/x-large';
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   Io,
+  AuthGuard,
   AuthService,
   Storage,
   AppState

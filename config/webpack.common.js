@@ -23,7 +23,7 @@ const HtmlElementsPlugin = require('./html-elements-plugin');
  */
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = {
-  title: 'Angular2 Webpack Starter by @gdi2290 from @AngularClass',
+  title: 'Simple Chat',
   baseUrl: '',
   isDevServer: helpers.isWebpackDevServer()
 };
@@ -34,7 +34,7 @@ const METADATA = {
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
 module.exports = function(options) {
-  isProd = options.env === 'production';
+  isProd = options.env != 'production';
   return {
 
     /*

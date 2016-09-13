@@ -9,6 +9,7 @@ import { Register } from './register/register.component';
 import { Welcome }  from './welcome/welcome.component';
 
 import { routes } from './auth.routes';
+import { Storage } from '../storage.service';
 
 @NgModule({
   imports: [
@@ -23,6 +24,6 @@ import { routes } from './auth.routes';
     Welcome
   ]
 })
-export default class AuthModule {
+export class AuthModule {
   static routes = routes;
 }

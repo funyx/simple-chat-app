@@ -14,8 +14,14 @@ export class Io {
     io.sails.url = 'http://localhost:1234'
     io.sails.autoConnect = false;
     this.socket = io.sails.connect();
-    // this.connect(io);
+    this.bind_events();
   }
-  // connect(io){
-  // }
+  bind_events(){
+    this.socket.on('user',(msg)=>{
+      console.log('new socket message','user',msg);
+    })
+    this.socket.on('room',(msg)=>{
+      console.log('new socket message','room',msg);
+    })
+  }
 }

@@ -41,13 +41,14 @@ export class Register{
       register_data.public_name,
       register_data.password)
       .then((response)=>{
-        this._storage.save('me',new appUser(response))
+        this._storage.save('me',new appUser(response));
+        this.router.navigate(['/home']);
       },(error)=>{
         this.registration_error = true;
         this.registration_error_code = error.response.code;
         this.registration_error_message = error.response.message;
         this.registration_error_data = error.response.data;
-      }).then(()=>this.router.navigate(['/home']));
+      });
   }
   ngAfterViewInit() {
     console.log(this.registration_error);

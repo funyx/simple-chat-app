@@ -46,5 +46,11 @@
       <input type="checkbox" name="autoLogin" [(ngModel)]="model.autoLogin" #autoLogin="ngModel" value="on" /> Auto-login
     </label>
   </div>
+  <div class="alert alert-danger fade in" role="alert" *ngIf="login_error">
+    <span>{{login_error_message}}</span>
+  </div>
   <button class="btn btn-lg btn-primary btn-block" [disabled]="!loginForm.form.valid" type="submit">Login</button>
+  <p class="lead">
+    <button class="btn btn-lg btn-default btn-block" routerLink="/auth/register">Register</button>
+  </p>
 </form>

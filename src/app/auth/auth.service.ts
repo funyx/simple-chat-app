@@ -7,7 +7,7 @@ export class AuthService {
   constructor(
     private _io : Io
   ){
-    console.log('im fired',this._io);
+    // console.log('im fired',this._io);
   }
 
   private promisify_post(url,data){
@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   autoLogin(identifier: string){
-    return this._io.socket.post('/user/autoLogin',{
+    return this.promisify_post('/user/autoLogin',{
       identifier
     });
   }
