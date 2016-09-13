@@ -1,0 +1,80 @@
+/*sidebar style*/
+.row-fluid .me{
+  width:100%;
+  padding:0.2rem;
+}
+.row-fluid .me .wrap{
+  border:0.05rem solid #c8c8ff;
+}
+.row-fluid .me .wrap .avatar{
+  width:30%;
+  overflow: hidden;
+  float:left;
+}
+.row-fluid .me .wrap .avatar img{
+  width: 86%;
+  height:86%;
+  padding:7%;
+  border-radius: 50%;
+}
+
+.row-fluid .me .wrap .info{
+  font-size: 0.8rem;
+  width:70%;
+  float:left;
+}
+.row-fluid .me .wrap .info span{
+  display: block;
+  width: 100%;
+}
+p.list-title {
+  font-size:0.8rem;
+  text-align: center;
+  /*text-decoration: underline;*/
+  border-bottom: 0.05rem solid #c8c8ff;
+  width:70%;
+  display: block;
+  margin:0 auto;
+  position:relative;
+}
+div.list-holder{
+  position: absolute;
+  width: 96%;
+  height: 100%;
+  margin: 2%;
+}
+div.list-holder .list-group.table-of-contents{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+.list-group.table-of-contents .wrap{
+  border:0.05rem solid #c8c8ff;
+}
+.list-group.table-of-contents .wrap .avatar{
+  width:30%;
+  overflow: hidden;
+  float:left;
+}
+.list-group.table-of-contents .wrap .avatar img{
+  width: 86%;
+  height:86%;
+  padding:7%;
+  border-radius: 50%;
+}
+
+.list-group.table-of-contents .wrap .info{
+  font-size: 0.8rem;
+  width:70%;
+  float:left;
+}
+.list-group.table-of-contents .wrap .info span{
+  display: block;
+  width: 100%;
+}
+.list-group.table-of-contents .list-group-item{
+  padding:0;
+  background: rgba(255,255,255,0.74);
+}

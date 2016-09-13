@@ -41,7 +41,10 @@ export class Register{
       register_data.public_name,
       register_data.password)
       .then((response)=>{
-        this._storage.save('me',new appUser(response));
+        let r:any;
+        r = response;
+        r.is_online=true;
+        this._storage.save('me',new appUser(r));
         this.router.navigate(['/home']);
       },(error)=>{
         this.registration_error = true;

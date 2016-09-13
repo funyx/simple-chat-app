@@ -17,11 +17,9 @@ import { AppState, InteralStateType } from './app.service';
 import { AuthGuard } from './auth.guard';
 import { Io } from './socket.service';
 import { Storage } from './storage.service';
+import { UsersService } from './users.service';
 import { AuthService } from './auth/auth.service';
-import { Home } from './home';
-import { About } from './about';
 import { NoContent } from './no-content';
-import { XLarge } from './home/x-large';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -30,6 +28,7 @@ const APP_PROVIDERS = [
   AuthGuard,
   AuthService,
   Storage,
+  UsersService,
   AppState
 ];
 
@@ -46,10 +45,7 @@ type StoreType = {
   bootstrap: [ App ],
   declarations: [
     App,
-    About,
-    Home,
-    NoContent,
-    XLarge
+    NoContent
   ],
   imports: [ // import Angular's modules
     BrowserModule,

@@ -16,8 +16,8 @@
   "license": "MIT",
   "scripts": {
     "electron:prod:mac": "npm run electron:build:mac && npm run electron:pack:mac && npm run electron:image:mac",
-    "electron:build:mac": "npm run build:prod && electron-packager ./dist SimpleChat --out=./build/mac --platform=darwin --arch=x64 --version=1.2.4 --overwrite",
-    "electron:pack:mac": "asar pack build/mac/SimpleChat-darwin-x64/SimpleChat.app/Contents/Resources/app build/mac/SimpleChat-darwin-x64/SimpleChat.app/Contents/Resources/app.asar",
+    "electron:build:mac": "rimraf ./build/mac npm run build:prod && electron-packager ./dist SimpleChat --out=./build/mac --platform=darwin --arch=x64 --version=1.2.4",
+    "electron:pack:mac": "asar pack ./build/mac/SimpleChat-darwin-x64/SimpleChat.app/Contents/Resources/app ./build/mac/SimpleChat-darwin-x64/SimpleChat.app/Contents/Resources/app.asar && rm -rf ./build/mac/SimpleChat-darwin-x64/SimpleChat.app/Contents/Resources/app",
     "electron:image:mac": "cp ./Icon.icns build/mac/SimpleChat-darwin-x64/SimpleChat.app/Contents/Resources/electron.icns",
     "electron": "npm run build:dev && ./node_modules/.bin/electron dist/electronApp.js",
     "build:dev": "webpack --config config/webpack.dev.js --progress --profile",

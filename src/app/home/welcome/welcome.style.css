@@ -1,0 +1,13 @@
+/*welcome style*/
+homeWelcome {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: white;
+  overflow: auto;
+}
+.welcome-message{
+  position: relative;
+  display: table;
+  margin: 25% auto;
+}

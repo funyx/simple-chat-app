@@ -1,0 +1,32 @@
+<div class="row-fluid">
+  <div class="me">
+    <div class="wrap">
+      <div class="avatar">
+        <img src="https://pixabay.com/static/uploads/photo/2015/10/01/21/39/background-image-967820_960_720.jpg" />
+      </div>
+      <div class="info">
+        <span>{{me.public_name}}</span>
+        <span *ngIf="me.public_name != me.username" class="help-block">{{me.username}}</span>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <p class="list-title">People Online</p>
+  <div class="list-holder">
+    <div class="list-group table-of-contents">
+      <a
+        *ngFor="let user of users_online"
+        class="list-group-item">
+        <div class="wrap">
+          <div class="avatar">
+            <img src="https://pixabay.com/static/uploads/photo/2015/10/01/21/39/background-image-967820_960_720.jpg" />
+          </div>
+          <div class="info">
+            <span>{{user.public_name}}</span>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

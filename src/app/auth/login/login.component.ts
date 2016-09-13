@@ -45,6 +45,7 @@ export class Login {
         }
         delete r.error;
         delete r.error_msg;
+        r.is_online = true;
         this._storage.save('me',new appUser(r));
         this._router.navigate(['/home']);
       }

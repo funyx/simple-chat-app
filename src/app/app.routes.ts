@@ -1,9 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
-import { Home } from './home';
-import { About } from './about';
 import { NoContent } from './no-content';
 import { AuthGuard } from './auth.guard';
 import { AuthModule }  from './auth';
+import { HomeModule } from './home';
 import { DataResolver } from './app.resolver';
 
 
@@ -14,10 +13,6 @@ export const ROUTES: Routes = [
     pathMatch: 'full'
   },
   { path: 'auth', loadChildren: () => AuthModule },
-  { path: 'home',  component: Home, canActivate: [AuthGuard]},
-  { path: 'about', component: About },
-  {
-    path: 'detail', loadChildren: () => System.import('./+detail')
-  },
+  { path: 'home',  loadChildren: () => HomeModule, canActivate: [AuthGuard]},
   { path: '**',    component: NoContent },
 ];
