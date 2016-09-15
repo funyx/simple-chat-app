@@ -4,7 +4,9 @@ import { AuthService } from '../auth.service';
 import { Storage } from '../../storage.service';
 
 import { appUser } from '../../_models/appUser';
+import { appRoom } from '../../_models/appRoom';
 import { RegisterModel } from './register';
+import { AppState } from '../../app.service';
 
 @Component({
   selector: 'register-form',
@@ -21,10 +23,10 @@ export class Register{
   public registration_error_data;
   @ViewChild('registerForm') form;
   constructor(
-    public router: Router,
     private _router: Router,
     private _storage: Storage,
-    private _service: AuthService
+    private _service: AuthService,
+    private _state: AppState
   ) {
   }
   doRegister(data) {
@@ -43,9 +45,11 @@ export class Register{
       .then((response)=>{
         let r:any;
         r = response;
+        let rooms : appRoom[] = r.rooms;
+        this._state.set('rooms',rooms);
         r.is_online=true;
         this._storage.save('me',new appUser(r));
-        this.router.navigate(['/home']);
+        this._router.navigate(['/home']);
       },(error)=>{
         this.registration_error = true;
         this.registration_error_code = error.response.code;

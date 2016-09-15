@@ -1,7 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Storage } from '../../storage.service';
-
 import { appUser } from '../../_models/appUser';
+import { appRoom } from '../../_models/appRoom';
+import { AppState } from '../../app.service';
 
 @Component({
   selector: 'homeWelcome',
@@ -15,10 +16,9 @@ import { appUser } from '../../_models/appUser';
 export class Welcome {
   constructor(
     private _storage: Storage,
+    private _state: AppState
   ) {
-  }
-  doLogin(data) {
-    event.preventDefault();
+    // console.log(this._state.get('rooms'));
   }
   ngAfterViewInit() {
   }

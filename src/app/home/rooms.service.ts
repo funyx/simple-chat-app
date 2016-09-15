@@ -3,11 +3,13 @@ import { Io } from '../socket.service';
 import { Storage } from '../storage.service';
 
 @Injectable()
-export class AuthService {
+export class RoomsService {
+  private _me;
   constructor(
+    private _storage: Storage,
     private _io : Io
   ){
-    // console.log('im fired',this._io);
+    this._me = this._storage.get('me');
   }
 
   private promisify_post(url,data){
@@ -16,6 +18,7 @@ export class AuthService {
         url,
         data
       ,function(response_body,response){
+        console.log(response_body.data);
         if(response.statusCode===200){
           res(response_body.data);
         }else{
@@ -24,27 +27,21 @@ export class AuthService {
       })
     });
   }
-
-  login(identifier: string, password: string, autoLogin: boolean) {
-    return this.promisify_post('/auth/login',{
-      identifier,
-      password,
-      autoLogin
+  loadRoom(uid:string){
+    return this.promisify_post('/room/messages',{
+      uid
     });
   }
-
-  register(username: string, email: string, public_name: string, password: string) {
-    return this.promisify_post('/auth/register',{
-      username,
-      email,
-      public_name,
-      password
+  sendMsg(uid:string,author:number,content:string){
+    return this.promisify_post('/room/message',{
+      author,
+      uid,
+      content
     });
   }
-
-  autoLogin(identifier: string){
-    return this.promisify_post('/user/autoLogin',{
-      identifier
+  initRoom(vars:any[]) {
+    return this.promisify_post('/room/init',{
+      vars
     });
   }
 }

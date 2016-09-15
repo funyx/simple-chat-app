@@ -7,7 +7,7 @@ import { AppState } from '../app.service';
   templateUrl: './home.template.html'
 })
 export class Home {
-  ngOnInit() {
-    // console.log('hello `Home` component');
+  public opa(){
+    console.log('opa');
   }
 }

@@ -7,8 +7,13 @@ import { Home } from './home.component';
 import { Sidebar }   from './sidebar/sidebar.component';
 import { Topbar }  from './topbar/topbar.component';
 import { Welcome }  from './welcome/welcome.component';
+import { Chat }  from './chat/chat.component';
+import { chatHeader }  from './chat/partials/chatHeader.component';
+import { chatBody }  from './chat/partials/chatBody.component';
+import { chatFooter }  from './chat/partials/chatFooter.component';
 
 import { routes } from './home.routes';
+import { RoomsService } from './rooms.service';
 
 @NgModule({
   imports: [
@@ -20,7 +25,14 @@ import { routes } from './home.routes';
     Home,
     Topbar,
     Sidebar,
-    Welcome
+    Welcome,
+    Chat,
+    chatHeader,
+    chatBody,
+    chatFooter
+  ],
+  providers: [
+    RoomsService
   ]
 })
 export class HomeModule {

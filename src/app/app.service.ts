@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Storage } from './storage.service';
 
 export type InteralStateType = {
   [key: string]: any
@@ -8,7 +9,9 @@ export type InteralStateType = {
 export class AppState {
   _state: InteralStateType = { };
 
-  constructor() {
+  constructor(
+    private _storage : Storage
+  ) {
 
   }
 
@@ -25,11 +28,12 @@ export class AppState {
   get(prop?: any) {
     // use our state getter for the clone
     const state = this.state;
-    return state.hasOwnProperty(prop) ? state[prop] : state;
+    return state.hasOwnProperty(prop) ? state[prop] : (this._storage.get(`${prop}`) ? this._storage.get(`${prop}`) : false);
   }
 
   set(prop: string, value: any) {
     // internally mutate our state
+    this._storage.save(`${prop}`,value);
     return this._state[prop] = value;
   }
 

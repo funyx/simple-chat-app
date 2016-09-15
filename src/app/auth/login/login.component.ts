@@ -4,7 +4,9 @@ import { AuthService } from '../auth.service';
 import { Storage } from '../../storage.service';
 
 import { appUser } from '../../_models/appUser';
+import { appRoom } from '../../_models/appRoom';
 import { LoginModel } from './login';
+import { AppState } from '../../app.service';
 
 @Component({
   selector: 'login-form',
@@ -22,7 +24,8 @@ export class Login {
   constructor(
     private _router: Router,
     private _storage: Storage,
-    private _service: AuthService
+    private _service: AuthService,
+    private _state: AppState
   ) {
   }
   doLogin(data) {
@@ -45,6 +48,8 @@ export class Login {
         }
         delete r.error;
         delete r.error_msg;
+        let rooms : appRoom[] = r.rooms;
+        this._state.set('rooms',rooms);
         r.is_online = true;
         this._storage.save('me',new appUser(r));
         this._router.navigate(['/home']);

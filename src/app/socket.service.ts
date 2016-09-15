@@ -20,6 +20,9 @@ export class Io {
     this.socket.on('user',(msg)=>{
       console.log('new socket message','user',msg);
     })
+    this.socket.on('user_logged_in',(msg)=>{
+      console.log('new socket message','user_logged_in',msg);
+    })
     this.socket.on('room',(msg)=>{
       console.log('new socket message','room',msg);
     })

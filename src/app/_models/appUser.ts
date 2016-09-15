@@ -1,4 +1,5 @@
 export class appUser {
+  public id;
   public username;
   public email;
   public public_name;
@@ -6,6 +7,7 @@ export class appUser {
   public avatar;
   public is_online;
   constructor(user_data){
+    this.id = user_data.id;
     this.username = user_data.username || 'Anonymous';
     this.email = user_data.email || 'Private';
     this.public_name = user_data.public_name || this.username;

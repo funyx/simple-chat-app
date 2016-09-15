@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Io } from './socket.service';
-import { Storage } from '../storage.service';
 
 @Injectable()
 export class UsersService {
