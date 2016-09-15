@@ -6,6 +6,7 @@ import { appRoom } from '../../../_models/appRoom';
 import { appUser } from '../../../_models/appUser';
 import { appMessages } from '../../../_models/appMessages';
 import { RoomsService } from '../../rooms.service';
+import { newChatMessage } from './newChatMessage';
 
 @Component({
   selector: 'chat-footer',
@@ -57,34 +58,34 @@ import { RoomsService } from '../../rooms.service';
 export class chatFooter implements OnInit {
   private _uid : string;
   private _me : appUser;
-  public model : any = {};
+  public model : newChatMessage;
   constructor(
     private _activeroute:ActivatedRoute,
     private _app:AppState,
     private _rooms:RoomsService
   ){
     this._me = new appUser(this._app.get('me'));
-    this.model = { "content":'opa'};
+    this.model = new newChatMessage('');
   }
   public newMessage(e){
     if(e.keyCode === 13){
       e.preventDefault();
-      return console.log(e,this.model);
-      this._rooms.sendMsg(this._uid,this._me.id,this.model.content)
-        .then(function(res){
-          this.model.content = '';
-          console.log(res)
-        })
-        .catch(function(err){
-          console.log(err);
-        })
+      return console.log(e,this);
+      // this._rooms.sendMsg(this._uid,this._me.id,this.model.content)
+      //   .then(function(res){
+      //     this.model.content = '';
+      //     console.log(res)
+      //   })
+      //   .catch(function(err){
+      //     console.log(err);
+      //   })
     }
   }
   ngOnInit(){
     this._activeroute.params
       .map(params => params['uid'])
       .subscribe((uid) => {
-        this.model = '';
+        this.model.content = '';
         this._uid = uid;
       })
   }
