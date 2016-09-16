@@ -4,7 +4,7 @@ import { ActivatedRoute, Router }       from '@angular/router';
 import { Storage } from '../../storage.service';
 import { UsersService } from '../../users.service';
 import { AppState } from '../../app.service';
-import { RoomsService } from '../rooms.service';
+import { RoomService } from '../rooms.service';
 
 import { appRoom } from '../../_models/appRoom';
 import { appUser } from '../../_models/appUser';
@@ -23,7 +23,7 @@ export class Sidebar implements OnInit, OnDestroy {
   public users_online;
   public rooms : appRoom[] = [];
   constructor(
-    private _rooms: RoomsService,
+    private _rooms: RoomService,
     private _router: Router,
     private _storage: Storage,
     private _users: UsersService,

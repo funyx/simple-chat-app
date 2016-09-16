@@ -13,7 +13,7 @@ import { chatBody }  from './chat/partials/chatBody.component';
 import { chatFooter }  from './chat/partials/chatFooter.component';
 
 import { routes } from './home.routes';
-import { RoomsService } from './rooms.service';
+import { RoomService } from './rooms.service';
 
 @NgModule({
   imports: [
@@ -32,7 +32,7 @@ import { RoomsService } from './rooms.service';
     chatFooter
   ],
   providers: [
-    RoomsService
+    RoomService
   ]
 })
 export class HomeModule {

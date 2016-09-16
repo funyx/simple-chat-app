@@ -5,7 +5,7 @@ import { AppState } from '../../../app.service';
 import { appRoom } from '../../../_models/appRoom';
 import { appUser } from '../../../_models/appUser';
 import { appMessages } from '../../../_models/appMessages';
-import { RoomsService } from '../../rooms.service';
+import { RoomService } from '../../rooms.service';
 import { newChatMessage } from './newChatMessage';
 
 @Component({
@@ -40,52 +40,45 @@ import { newChatMessage } from './newChatMessage';
       #registerForm="ngForm">
       <textarea
         class="chat-window-message"
-        [(ngModel)]="model.content"
-        (keyup)="newMessage($event,this.value)"
-        #content="ngModel"
+        [(ngModel)]="content"
+        (keyup)="newMessage($event)"
         name="message"
         required
         autocomplete="off" autofocus></textarea>
     </form>
   `
 })
-// class newMessageModell {
-//   constructor(
-//     public content:string
-//   ){}
-// }
 
 export class chatFooter implements OnInit {
   private _uid : string;
   private _me : appUser;
-  public model : newChatMessage;
+  public content;
   constructor(
     private _activeroute:ActivatedRoute,
     private _app:AppState,
-    private _rooms:RoomsService
+    private _rooms:RoomService
   ){
     this._me = new appUser(this._app.get('me'));
-    this.model = new newChatMessage('');
   }
   public newMessage(e){
     if(e.keyCode === 13){
       e.preventDefault();
-      return console.log(e,this);
-      // this._rooms.sendMsg(this._uid,this._me.id,this.model.content)
-      //   .then(function(res){
-      //     this.model.content = '';
-      //     console.log(res)
-      //   })
-      //   .catch(function(err){
-      //     console.log(err);
-      //   })
+      var component = this;
+      this._rooms.sendMsg(this._uid,this._me.id,this.content)
+        .then((res) => {
+          this.content='';
+          // component._rooms.newMessage(res);
+        })
+        .catch((err) => {
+          console.log('newMessage err',err);
+        })
     }
   }
   ngOnInit(){
     this._activeroute.params
       .map(params => params['uid'])
       .subscribe((uid) => {
-        this.model.content = '';
+        this.content = '';
         this._uid = uid;
       })
   }

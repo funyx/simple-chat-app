@@ -4,7 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { PromiseObservable } from 'rxjs/Observable/PromiseObservable';
 import { AppState } from '../../../app.service';
-import { RoomsService } from '../../rooms.service';
+import { RoomService } from '../../rooms.service';
 import { appRoom } from '../../../_models/appRoom';
 import { appUser } from '../../../_models/appUser';
 import { appMessages } from '../../../_models/appMessages';
@@ -59,7 +59,7 @@ export class chatBody implements OnInit {
   constructor(
     private _app : AppState,
     private _activeroute : ActivatedRoute,
-    private _rooms : RoomsService
+    private _rooms : RoomService
   ){
     this.messages = [];
     this.me = new appUser(this._app.get('me'));
