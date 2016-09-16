@@ -1,47 +1,116 @@
 import { Injectable } from '@angular/core';
-import { Io } from '../socket.service';
-import { Storage } from '../storage.service';
+
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/map';
+
+import { AppState } from '../app.service';
+import { Io, SocketRequest, SocketResponse } from '../socket.service';
+
+// Interfaces
+import { Room } from '../_interfaces/room.interface';
 
 @Injectable()
-export class RoomsService {
-  private _me;
+export class RoomService {
+  private _rooms$: Subject<Room[]>;
+  private dataStore: {
+    rooms: Room[]
+  };
+
   constructor(
-    private _storage: Storage,
-    private _io : Io
-  ){
-    this._me = this._storage.get('me');
+    private _io: Io,
+    private _appstate: AppState
+  ) {
+    this.dataStore = { rooms: [] };
+    this._rooms$ = <Subject<Room[]>>new Subject();
+    window['test'] = this;
   }
 
-  private promisify_post(url,data){
-    return new Promise((res,rej)=>{
-      this._io.socket.post(
-        url,
-        data
-      ,function(response_body,response){
-        console.log(response_body.data);
-        if(response.statusCode===200){
-          res(response_body.data);
-        }else{
-          rej({error:true,error_msg:`socket reponse code ${response.statusCode}`,response:response.error});
+  get todos$() {
+    return this._rooms$.asObservable();
+  }
+
+  loadAll(debug:boolean=false) {
+    let r = {
+      debug:debug,
+      url:'/rooms',
+      params:{me:this._appstate.get('me').id}
+    };
+    this._io.request$(new SocketRequest(r))
+    .map(res => new SocketResponse(res).body.data)
+    .subscribe(
+      data => {
+        this.dataStore.rooms = data;
+        this._rooms$.next(this.dataStore.rooms);
+      }
+    );
+  }
+
+  load(uid: string,debug:boolean=false) {
+    let r = {
+      debug:debug,
+      url:`/rooms/${uid}`,
+      params:{me:this._appstate.get('me').id}
+    };
+    this._io.request$(new SocketRequest(r))
+      .map(res => new SocketResponse(res).body.data)
+      .subscribe(
+        data => {
+          let notFound = true;
+
+          this.dataStore.rooms.forEach((item, index) => {
+            if (item.uid === data.uid) {
+              this.dataStore.rooms[index] = data;
+              notFound = false;
+            }
+          });
+          if (notFound) {
+            this.dataStore.rooms.push(data);
+          }
+          this._rooms$.next(this.dataStore.rooms);
         }
-      })
-    });
+      );
   }
-  loadRoom(uid:string){
-    return this.promisify_post('/room/messages',{
-      uid
-    });
+
+  create(room: Room,debug:boolean=false) {
+    return alert('not implemented');
+    // let r = {
+    //   debug:debug,
+    //   url:`/rooms`,
+    //   params:{me:this._appstate.get('me').id}
+    // };
+    // this._io.socket.post(`/rooms`, JSON.stringify(room))
+    //   .map(response => response.json()).subscribe(data => {
+    //     this.dataStore.rooms.push(data);
+    //     this._rooms$.next(this.dataStore.rooms);
+    //   }, error => console.log('Could not create room.'));
   }
-  sendMsg(uid:string,author:number,content:string){
-    return this.promisify_post('/room/message',{
-      author,
-      uid,
-      content
-    });
+
+  update(room: Room,debug:boolean=false) {
+    return alert('not implemented');
+    // let r = {
+    //   debug:debug,
+    //   url:`/rooms/${room.uid}`,
+    //   params:{me:this._appstate.get('me').id}
+    // };
+    // this._io.socket.put(`/rooms/${room.id}`, JSON.stringify(room))
+    //   .map(response => response.json()).subscribe(data => {
+    //     this.dataStore.rooms.forEach((todo, i) => {
+    //       if (todo.id === data.id) { this.dataStore.rooms[i] = data; }
+    //     });
+    //
+    //     this._rooms$.next(this.dataStore.rooms);
+    //   }, error => console.log('Could not update room.'));
   }
-  initRoom(vars:any[]) {
-    return this.promisify_post('/room/init',{
-      vars
-    });
+
+  remove(roomId: number) {
+    return alert('not implemented');
+    // this._io.socket.delete(`/rooms/${roomId}`).subscribe(response => {
+    //   this.dataStore.rooms.forEach((t, i) => {
+    //     if (t.id === todoId) { this.dataStore.rooms.splice(i, 1); }
+    //   });
+    //
+    //   this._rooms$.next(this.dataStore.rooms);
+    // }, error => console.log('Could not delete room.'));
   }
 }
