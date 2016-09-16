@@ -1,9 +1,11 @@
 import { Routes, RouterModule } from '@angular/router';
-import { NoContent } from './no-content';
-import { AuthGuard } from './auth.guard';
-import { AuthModule }  from './auth';
-import { HomeModule } from './home';
-import { DataResolver } from './app.resolver';
+
+import { AuthGuard } from '../_services/auth.guard';
+
+import { AuthModule }  from '../auth';
+import { HomeModule } from '../home';
+
+import { NoContent } from '../no-content';
 
 
 export const ROUTES: Routes = [

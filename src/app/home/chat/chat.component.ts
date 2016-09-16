@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, OnInit, OnDestroy }  from '@angular/core'
 import { ActivatedRoute, Router }                           from '@angular/router';
 import { appUser } from '../../_models/appUser';
 import { appRoom } from '../../_models/appRoom';
-import { AppState } from '../../app.service';
+import { AppState } from '../../_services/app.service';
 import { BehaviorSubject }  from 'rxjs/BehaviorSubject';
 
 @Component({
@@ -27,6 +27,6 @@ export class Chat implements OnInit, OnDestroy {
       });
   }
   ngOnDestroy() {
-    // 
+    //
   }
 }

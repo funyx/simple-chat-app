@@ -1,7 +1,6 @@
-
-import { Home } from './home.component';
-import { Welcome } from './welcome/welcome.component';
-import { Chat } from './chat/chat.component';
+import { Home } from '../home/home.component';
+import { Welcome } from '../home/welcome/welcome.component';
+import { Chat } from '../home/chat/chat.component';
 
 export const routes = [
   {

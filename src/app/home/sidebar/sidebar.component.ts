@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router }       from '@angular/router';
 
-import { Storage } from '../../storage.service';
-import { UsersService } from '../../users.service';
-import { AppState } from '../../app.service';
-import { RoomService } from '../rooms.service';
+import { AppState } from '../../_services/app.service';
+import { RoomService } from '../../_services/room.service';
+import { Storage } from '../../_services/storage.service';
+import { UsersService } from '../../_services/users.service';
 
 import { appRoom } from '../../_models/appRoom';
 import { appUser } from '../../_models/appUser';

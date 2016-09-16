@@ -1,12 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router }       from '@angular/router';
-import { AuthService } from '../auth.service';
-import { Storage } from '../../storage.service';
+
+import { AppState } from '../../_services/app.service';
+import { AuthService } from '../../_services/auth.service';
+import { Storage } from '../../_services/storage.service';
 
 import { appUser } from '../../_models/appUser';
 import { appRoom } from '../../_models/appRoom';
 import { LoginModel } from './login';
-import { AppState } from '../../app.service';
 
 @Component({
   selector: 'login-form',
@@ -26,8 +27,7 @@ export class Login {
     private _storage: Storage,
     private _service: AuthService,
     private _state: AppState
-  ) {
-  }
+  ){}
   doLogin(data) {
     event.preventDefault();
     let auth_data = Object.assign({},this.model);

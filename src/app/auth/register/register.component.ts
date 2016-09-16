@@ -1,12 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router }       from '@angular/router';
-import { AuthService } from '../auth.service';
-import { Storage } from '../../storage.service';
+
+import { AppState } from '../../_services/app.service';
+import { AuthService } from '../../_services/auth.service';
+import { Storage } from '../../_services/storage.service';
 
 import { appUser } from '../../_models/appUser';
 import { appRoom } from '../../_models/appRoom';
 import { RegisterModel } from './register';
-import { AppState } from '../../app.service';
 
 @Component({
   selector: 'register-form',
@@ -27,8 +28,7 @@ export class Register{
     private _storage: Storage,
     private _service: AuthService,
     private _state: AppState
-  ) {
-  }
+  ){}
   doRegister(data) {
     event.preventDefault();
     this.registration_error = false;

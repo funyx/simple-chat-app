@@ -3,13 +3,14 @@ import { FormsModule }    from '@angular/forms';
 import { CommonModule }   from '@angular/common';
 import { RouterModule }   from '@angular/router';
 
+import { routes } from '../_routes/auth.routes';
+import { Storage } from '../_services/storage.service';
+
 import { Auth } from './auth.component';
 import { Login }   from './login/login.component';
 import { Register } from './register/register.component';
 import { Welcome }  from './welcome/welcome.component';
 
-import { routes } from './auth.routes';
-import { Storage } from '../storage.service';
 
 @NgModule({
   imports: [

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Storage } from '../../storage.service';
+import { Storage } from '../../_services/storage.service';
 
 import { appUser } from '../../_models/appUser';
 import { TopbarModel } from './topbar';

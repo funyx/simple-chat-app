@@ -1,8 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router }       from '@angular/router';
-import { AppState } from './app.service';
-import { Storage } from './storage.service';
-import { AuthService } from './auth/auth.service';
+import { AppState } from './_services/app.service';
+import { AuthService } from './_services/auth.service';
+import { Storage } from './_services/storage.service';
 
 @Component({
   selector: 'app',

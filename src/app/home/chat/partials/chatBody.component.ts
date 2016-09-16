@@ -3,8 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { PromiseObservable } from 'rxjs/Observable/PromiseObservable';
-import { AppState } from '../../../app.service';
-import { RoomService } from '../../rooms.service';
+
+import { AppState } from '../../../_services/app.service';
+import { RoomService } from '../../../_services/room.service';
+
 import { appRoom } from '../../../_models/appRoom';
 import { appUser } from '../../../_models/appUser';
 import { appMessages } from '../../../_models/appMessages';

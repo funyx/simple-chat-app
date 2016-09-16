@@ -1,10 +1,7 @@
-// import { ModuleWithProviders }   from '@angular/core';
-// import { Routes, RouterModule }  from '@angular/router';
-
-import { Auth } from './auth.component';
-import { Login } from './login/login.component';
-import { Register }   from './register/register.component';
-import { Welcome } from './welcome/welcome.component';
+import { Auth } from '../auth/auth.component';
+import { Login } from '../auth/login/login.component';
+import { Register }   from '../auth/register/register.component';
+import { Welcome } from '../auth/welcome/welcome.component';
 
 export const routes = [
   {

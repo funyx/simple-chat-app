@@ -1,8 +1,10 @@
 import { Component, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Subject} from 'rxjs/Subject';
-import { AppState } from '../../../app.service';
-import { Storage } from '../../../storage.service';
+
+import { AppState } from '../../../_services/app.service';
+import { Storage } from '../../../_services/storage.service';
+
 import { appRoom } from '../../../_models/appRoom';
 import { appUser } from '../../../_models/appUser';
 

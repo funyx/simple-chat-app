@@ -4,26 +4,24 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
-
 /*
  * Platform and Environment providers/directives/pipes
  */
 import { ENV_PROVIDERS } from './environment';
-import { ROUTES } from './app.routes';
+import { ROUTES } from './_routes/app.routes';
+// App-wide services
+import { AppState, InteralStateType } from './_services/app.service';
+import { AuthGuard } from './_services/auth.guard';
+import { AuthService } from './_services/auth.service';
+import { Io } from './_services/socket.service';
+import { UsersService } from './_services/users.service';
+import { Storage } from './_services/storage.service';
 // App is our top level component
 import { App } from './app.component';
-import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { AppState, InteralStateType } from './app.service';
-import { AuthGuard } from './auth.guard';
-import { Io } from './socket.service';
-import { Storage } from './storage.service';
-import { UsersService } from './users.service';
-import { AuthService } from './auth/auth.service';
 import { NoContent } from './no-content';
 
 // Application wide providers
 const APP_PROVIDERS = [
-  ...APP_RESOLVER_PROVIDERS,
   Io,
   AuthGuard,
   AuthService,

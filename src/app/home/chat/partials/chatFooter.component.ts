@@ -1,11 +1,12 @@
 import { Component, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { AppState } from '../../../app.service';
+import { AppState } from '../../../_services/app.service';
+import { RoomService } from '../../../_services/room.service';
+
+import { appMessages } from '../../../_models/appMessages';
 import { appRoom } from '../../../_models/appRoom';
 import { appUser } from '../../../_models/appUser';
-import { appMessages } from '../../../_models/appMessages';
-import { RoomService } from '../../rooms.service';
 import { newChatMessage } from './newChatMessage';
 
 @Component({

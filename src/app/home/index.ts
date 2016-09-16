@@ -3,6 +3,9 @@ import { FormsModule }    from '@angular/forms';
 import { CommonModule }   from '@angular/common';
 import { RouterModule }   from '@angular/router';
 
+import { routes } from '../_routes/home.routes';
+import { RoomService } from '../_services/room.service';
+
 import { Home } from './home.component';
 import { Sidebar }   from './sidebar/sidebar.component';
 import { Topbar }  from './topbar/topbar.component';
@@ -11,9 +14,6 @@ import { Chat }  from './chat/chat.component';
 import { chatHeader }  from './chat/partials/chatHeader.component';
 import { chatBody }  from './chat/partials/chatBody.component';
 import { chatFooter }  from './chat/partials/chatFooter.component';
-
-import { routes } from './home.routes';
-import { RoomService } from './rooms.service';
 
 @NgModule({
   imports: [

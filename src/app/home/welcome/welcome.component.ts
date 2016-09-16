@@ -1,8 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { Storage } from '../../storage.service';
-import { appUser } from '../../_models/appUser';
+
+import { AppState } from '../../_services/app.service';
+import { Storage } from '../../_services/storage.service';
+
 import { appRoom } from '../../_models/appRoom';
-import { AppState } from '../../app.service';
+import { appUser } from '../../_models/appUser';
 
 @Component({
   selector: 'homeWelcome',
