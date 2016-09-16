@@ -1,51 +1,43 @@
+import { Room } from '../_interfaces/room.interface';
 import { appUser } from './appUser';
 
-export class appRoom {
-  public id ;
-  public name;
-  public uid;
-  public createdAt;
-  public updatedAt;
+export class appRoom implements Room {
+  public id: number;
+  public name: string;
+  public uid: string;
+  public createdAt: any;
+  public updatedAt: any;
+  public participants: string;
   public users: appUser[];
-  constructor(room_data){
+  private me;
+  constructor(
+    room_data : any,
+    me : appUser
+  ){
     this.id = room_data.id;
     this.name = room_data.name || '';
     this.uid = room_data.uid;
     this.users = room_data.users;
+    this.participants = room_data.participants;
     this.createdAt = room_data.createdAt;
     this.updatedAt = room_data.updatedAt;
+    this.me = me;
   }
   public compare_users_arrays(users1:number[],users2:number[]){
     if(users1.length != users2.length)return false;
     return users1.sort().join(',') === users2.sort().join(',');
   }
-  public get_users_array_by_uid(uid){
-    let u = this.users;
-    let found_u : number[] = [];
-    for(var i in u){
-      found_u.push(parseInt(u[i].id));
-    }
-    return found_u;
-  }
-  public get_uid_by_users_array(users){
-    let u = this.users;
-    let found_u : number[] = [];
-    for(var i in u){
-      found_u.push(parseInt(u[i].id));
-    }
-    return users.sort().join(',') === found_u.sort().join(',')?this.uid:false;
-  }
-  public users_wo_me(me){
+  public users_wo_me(){
     let u = this.users;
     let found_u : appUser[] = [];
     for(var i in u){
-      if(u[i].id != me) found_u.push(u[i]);
+      if(u[i].id != this.me.id) found_u.push(u[i]);
     }
     return found_u;
   }
-  public title(me){
+  public title(){
     if(this.name!='')return this.name;
-    let u : any[] = this.users_wo_me(me);
+    let u : any[] = this.users_wo_me();
     let title : string = '';
     for(let i=0; i<u.length;i++){
       title += u[i].public_name;

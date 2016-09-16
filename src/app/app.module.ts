@@ -14,7 +14,7 @@ import { AppState, InteralStateType } from './_services/app.service';
 import { AuthGuard } from './_services/auth.guard';
 import { AuthService } from './_services/auth.service';
 import { Io } from './_services/socket.service';
-import { UsersService } from './_services/users.service';
+import { UserService } from './_services/user.service';
 import { Storage } from './_services/storage.service';
 // App is our top level component
 import { App } from './app.component';
@@ -26,7 +26,7 @@ const APP_PROVIDERS = [
   AuthGuard,
   AuthService,
   Storage,
-  UsersService,
+  UserService,
   AppState
 ];
 

@@ -45,8 +45,8 @@ export class Register{
       .then((response)=>{
         let r:any;
         r = response;
-        let rooms : appRoom[] = r.rooms;
-        this._state.set('rooms',rooms);
+        // let rooms : List[] = r.rooms;
+        // this._state.set('rooms',rooms);
         r.is_online=true;
         this._storage.save('me',new appUser(r));
         this._router.navigate(['/home']);

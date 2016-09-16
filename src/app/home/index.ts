@@ -10,10 +10,10 @@ import { Home } from './home.component';
 import { Sidebar }   from './sidebar/sidebar.component';
 import { Topbar }  from './topbar/topbar.component';
 import { Welcome }  from './welcome/welcome.component';
-import { Chat }  from './chat/chat.component';
-import { chatHeader }  from './chat/partials/chatHeader.component';
-import { chatBody }  from './chat/partials/chatBody.component';
-import { chatFooter }  from './chat/partials/chatFooter.component';
+import { Room }  from './room/room.component';
+import { roomHeader }  from './room/partials/roomHeader.component';
+import { roomBody }  from './room/partials/roomBody.component';
+import { roomFooter }  from './room/partials/roomFooter.component';
 
 @NgModule({
   imports: [
@@ -26,10 +26,10 @@ import { chatFooter }  from './chat/partials/chatFooter.component';
     Topbar,
     Sidebar,
     Welcome,
-    Chat,
-    chatHeader,
-    chatBody,
-    chatFooter
+    Room,
+    roomHeader,
+    roomBody,
+    roomFooter
   ],
   providers: [
     RoomService

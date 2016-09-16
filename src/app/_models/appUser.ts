@@ -1,11 +1,13 @@
-export class appUser {
-  public id;
-  public username;
-  public email;
-  public public_name;
-  public timezone;
-  public avatar;
-  public is_online;
+import { User } from '../_interfaces/user.interface';
+
+export class appUser implements User {
+  public id:number;
+  public username:string;
+  public email:string;
+  public public_name:string;
+  public timezone:string;
+  public avatar:string;
+  public is_online:boolean;
   constructor(user_data){
     this.id = user_data.id;
     this.username = user_data.username || 'Anonymous';

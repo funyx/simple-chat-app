@@ -11,27 +11,26 @@
       <div class="clearfix"></div>
     </div>
   </div>
-  <!-- <p class="list-title">Chat Rooms</p>
+  <p class="list-title">Rooms ({{rooms_count | async }})</p>
   <div class="list-holder">
     <div class="list-group table-of-contents">
       <a
-        *ngFor="let room of rooms"
-        (click)="startChat('users',[me.id,user.id])"
+        *ngFor="let room of rooms | async"
+        (click)="open(room.uid)"
         class="list-group-item">
         <div class="wrap">
-          {{room.get_uid_by_users_array().toString()}}
           <div class="avatar">
             <img src="https://pixabay.com/static/uploads/photo/2015/10/01/21/39/background-image-967820_960_720.jpg" />
           </div>
           <div class="info">
-            <span>{{user.public_name}}</span>
+            <span>{{room.title()}}</span>
           </div>
           <div class="clearfix"></div>
         </div>
       </a>
     </div>
-  </div> -->
-  <p class="list-title">People Online</p>
+  </div>
+  <!-- <p class="list-title">People Online</p>
   <div class="list-holder">
     <div class="list-group table-of-contents">
       <a
@@ -49,5 +48,5 @@
         </div>
       </a>
     </div>
-  </div>
+  </div> -->
 </div>

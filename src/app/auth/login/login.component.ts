@@ -48,8 +48,8 @@ export class Login {
         }
         delete r.error;
         delete r.error_msg;
-        let rooms : appRoom[] = r.rooms;
-        this._state.set('rooms',rooms);
+        // let rooms : Room[] = r.rooms;
+        // this._state.set('rooms',rooms);
         r.is_online = true;
         this._storage.save('me',new appUser(r));
         this._router.navigate(['/home']);

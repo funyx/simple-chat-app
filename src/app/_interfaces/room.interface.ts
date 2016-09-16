@@ -5,6 +5,6 @@ export interface Room {
   name: string;
   createdAt: any;
   updatedAt: any;
-  value: string;
+  participants: string;
   users: User[];
 }

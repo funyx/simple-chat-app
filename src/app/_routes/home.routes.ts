@@ -1,6 +1,6 @@
 import { Home } from '../home/home.component';
 import { Welcome } from '../home/welcome/welcome.component';
-import { Chat } from '../home/chat/chat.component';
+import { Room } from '../home/room/room.component';
 
 export const routes = [
   {
@@ -17,8 +17,8 @@ export const routes = [
         component: Welcome
       },
       {
-        path: 'chat/:uid',
-        component: Chat
+        path: 'room/:uid',
+        component: Room
       }
     ]
   }
