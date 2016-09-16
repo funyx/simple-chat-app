@@ -7,14 +7,14 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 
-interface SocketRequest {
+export interface SocketRequestInterface {
   url:string;
   method:string;
   params:any;
   headers:any;
   debug:boolean;
 }
-class SocketRequestModel implements SocketRequest{
+export class SocketRequest implements SocketRequestInterface{
   public url:string;
   public method:string;
   public params:any;
@@ -34,6 +34,33 @@ class SocketRequestModel implements SocketRequest{
       params  : this.params,
       headers : this.headers
     }
+  }
+  public isDebug(){
+    return this.debug === true;
+  }
+}
+export interface SocketResponseInterface {
+  body:any;
+  error:any;
+  headers:any;
+  statusCode:number;
+  debug:boolean;
+}
+export class SocketResponse implements SocketResponseInterface{
+  public body:any;
+  public error:any;
+  public headers:any;
+  public statusCode:number;
+  public debug:boolean;
+  constructor(data:any){
+    this.body       = data.body         || {},
+    this.error      = data.error        || {},
+    this.headers    = data.headers      || {},
+    this.statusCode = data.statusCode   || 200,
+    this.debug      = data.debug        || false
+  }
+  public success(){
+    return this.statusCode === 200;
   }
   public isDebug(){
     return this.debug === true;
@@ -64,17 +91,19 @@ export class Io {
     })
   }
   // turn requests into observables
-  public request$( params : any ){
-    params = new SocketRequestModel( params );
+  public request$( data : SocketRequestInterface ){
+    let model = new SocketRequest( data );
     let request = new Observable(observer => {
-        this.socket.request(params.getParams(),function(response_body,response){
-          if(response.statusCode===200){
+        if(model.isDebug()) console.log(model);
+        this.socket.request(model.getParams(),function(body,res){
+          let response = new SocketResponse(Object.assign({debug : model.isDebug()},res));
+          if(response.success()){
             observer.next(response);
-            if(params.isDebug())return console.log(`${response.statusCode} : ${params.url}`,response);
+            if(response.isDebug())return console.log(response);
           }else{
             observer.error(response);
-            if(params.isDebug())return console.log(`${response.statusCode} : ${params.url}`,response);
-            throw new Error(`${response.statusCode} : ${params.url} -> ${response.error.message}`);
+            if(response.isDebug())return console.log(response);
+            throw new Error(`${response.statusCode} : ${model.url} -> ${response.error.message}`);
           }
           observer.complete();
         })
