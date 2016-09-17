@@ -8,20 +8,21 @@ export class appRoom implements Room {
   public createdAt: any;
   public updatedAt: any;
   public participants: string;
-  public users: appUser[];
+  public users: appUser[] = [];
   private me;
   constructor(
     room_data : any,
     me : appUser
   ){
     this.id = room_data.id;
-    this.name = room_data.name || '';
     this.uid = room_data.uid;
-    this.users = room_data.users;
+    this.name = room_data.name || '';
     this.participants = room_data.participants;
     this.createdAt = room_data.createdAt;
     this.updatedAt = room_data.updatedAt;
     this.me = me;
+    room_data.users.forEach(user=>this.users.push(new appUser(user)));
+    // this.users = room_data.users;
   }
   public compare_users_arrays(users1:number[],users2:number[]){
     if(users1.length != users2.length)return false;

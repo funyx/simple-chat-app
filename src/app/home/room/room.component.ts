@@ -1,12 +1,16 @@
-import { Component, ViewEncapsulation, OnInit, OnDestroy }  from '@angular/core';
-import { ActivatedRoute, Router }                           from '@angular/router';
-import { appUser } from '../../_models/appUser';
-import { appRoom } from '../../_models/appRoom';
-import { AppState } from '../../_services/app.service';
+import { Component, ViewEncapsulation, OnInit }  from '@angular/core';
+import { ActivatedRoute, Router }    from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject }  from 'rxjs/BehaviorSubject';
 
+import { AppState } from '../../_services/app.service';
+import { RoomService } from '../../_services/room.service';
+
+import { appRoom } from '../../_models/appRoom';
+import { appUser } from '../../_models/appUser';
+
 @Component({
-  selector: 'chat',
+  selector: 'room',
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
     './room.style.css'
@@ -14,19 +18,19 @@ import { BehaviorSubject }  from 'rxjs/BehaviorSubject';
   templateUrl:'./room.component.html',
 })
 
-export class Room implements OnInit, OnDestroy {
+export class Room implements OnInit {
+  public room : appRoom;
+  public me : appUser;
   constructor(
     private _activeroute: ActivatedRoute,
+    private _state: AppState,
+    private _router: Router
   ) {
+    this.me = new appUser(this._state.get('me'));
   }
   ngOnInit() {
-    this._activeroute.params
-      .map(params => params['uid'])
-      .subscribe((uid) => {
-        // console.log(uid);
-      });
-  }
-  ngOnDestroy() {
-    //
+    this._activeroute.data.forEach((data : any) => {
+      if(data.room)this.room = data.room;
+    });
   }
 }

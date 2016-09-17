@@ -73,15 +73,14 @@ export class RoomService {
       .subscribe(
         data => {
           let notFound = true;
-
           this.dataStore.rooms.forEach((item, index) => {
             if (item.uid === data.uid) {
-              this.dataStore.rooms[index] = data;
+              this.dataStore.rooms[index] = new appRoom(data,this.me);
               notFound = false;
             }
           });
           if (notFound) {
-            this.dataStore.rooms.push(data);
+            this.dataStore.rooms.push(new appRoom(data,this.me));
           }
           this._rooms$.next(this.dataStore.rooms);
         },

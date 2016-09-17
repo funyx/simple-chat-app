@@ -4,6 +4,7 @@ import { CommonModule }   from '@angular/common';
 import { RouterModule }   from '@angular/router';
 
 import { routes } from '../_routes/home.routes';
+import { RoomResolver } from '../_resolvers/room.resolver';
 import { RoomService } from '../_services/room.service';
 
 import { Home } from './home.component';
@@ -32,6 +33,7 @@ import { roomFooter }  from './room/partials/roomFooter.component';
     roomFooter
   ],
   providers: [
+    RoomResolver,
     RoomService
   ]
 })

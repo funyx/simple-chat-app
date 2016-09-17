@@ -1,8 +1,6 @@
-import { Component, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { PromiseObservable } from 'rxjs/Observable/PromiseObservable';
 
 import { AppState } from '../../../_services/app.service';
 import { RoomService } from '../../../_services/room.service';
@@ -47,31 +45,14 @@ import { appMessages } from '../../../_models/appMessages';
   `
 })
 export class roomBody implements OnInit {
-  public messages : appMessages[];
-  public me : appUser;
+  @Input() room: Observable<appRoom>;
+  @Input() me: appUser;
   constructor(
-    private _app : AppState,
-    private _activeroute : ActivatedRoute,
-    private _rooms : RoomService
+
   ){
-    this.messages = [];
-    this.me = new appUser(this._app.get('me'));
+
   }
   ngOnInit(){
-    this._activeroute.params
-      .map(params => params['uid'])
-      .subscribe((uid) => {
-        // this._rooms.load(uid)
-        // .subscribe((data:any)=>{
-        //   console.log(this.messages);
-        //   if(data.length){
-        //     for(var i in data){
-        //       this.messages.push(new appMessages(data));
-        //     }
-        //   }
-        // },(err)=>{
-        //   console.log('err',err);
-        // })
-      });
+
   }
 }

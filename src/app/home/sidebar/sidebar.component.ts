@@ -9,9 +9,6 @@ import { UserService } from '../../_services/user.service';
 
 import { appRoom } from '../../_models/appRoom';
 import { appUser } from '../../_models/appUser';
-import { SidebarModel } from './sidebar';
-
-// import { Room } from '../../_interfaces/Room';
 
 @Component({
   selector: 'sidebar',

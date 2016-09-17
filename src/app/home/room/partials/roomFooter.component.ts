@@ -1,5 +1,6 @@
-import { Component, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 import { AppState } from '../../../_services/app.service';
 import { RoomService } from '../../../_services/room.service';
@@ -51,36 +52,14 @@ import { newChatMessage } from './newChatMessage';
 })
 
 export class roomFooter implements OnInit {
-  private _uid : string;
-  private _me : appUser;
-  public content;
+  @Input() room: Observable<appRoom>;
+  @Input() me: appUser;
   constructor(
-    private _activeroute:ActivatedRoute,
-    private _app:AppState,
-    private _rooms:RoomService
+
   ){
-    this._me = new appUser(this._app.get('me'));
-  }
-  public newMessage(e){
-    if(e.keyCode === 13){
-      e.preventDefault();
-      var component = this;
-      // this._rooms.sendMsg(this._uid,this._me.id,this.content)
-      //   .then((res) => {
-      //     this.content='';
-      //     // component._rooms.newMessage(res);
-      //   })
-      //   .catch((err) => {
-      //     console.log('newMessage err',err);
-      //   })
-    }
+
   }
   ngOnInit(){
-    this._activeroute.params
-      .map(params => params['uid'])
-      .subscribe((uid) => {
-        this.content = '';
-        this._uid = uid;
-      })
+
   }
 }
