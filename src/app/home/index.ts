@@ -5,7 +5,9 @@ import { RouterModule }   from '@angular/router';
 
 import { routes } from '../_routes/home.routes';
 import { RoomResolver } from '../_resolvers/room.resolver';
+import { RoomMessagesResolver } from '../_resolvers/room.messages.resolver';
 import { RoomService } from '../_services/room.service';
+import { MessageService } from '../_services/message.service';
 
 import { Home } from './home.component';
 import { Sidebar }   from './sidebar/sidebar.component';
@@ -33,7 +35,9 @@ import { roomFooter }  from './room/partials/roomFooter.component';
     roomFooter
   ],
   providers: [
+    MessageService,
     RoomResolver,
+    RoomMessagesResolver,
     RoomService
   ]
 })

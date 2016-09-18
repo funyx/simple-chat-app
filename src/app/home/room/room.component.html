@@ -1,5 +1,5 @@
 <div class="room">
-  <room-header [room]="room" [me]="me"></room-header>
-  <room-body></room-body>
-  <room-footer></room-footer>
+  <room-header [room]="room" [me]="me" [messages]="messages"></room-header>
+  <room-body [room]="room" [me]="me" [messages]="messages"></room-body>
+  <room-footer [room]="room" [me]="me" [messages]="messages"></room-footer>
 </div>

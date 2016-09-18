@@ -6,6 +6,7 @@ import { BehaviorSubject }  from 'rxjs/BehaviorSubject';
 import { AppState } from '../../_services/app.service';
 import { RoomService } from '../../_services/room.service';
 
+import { appMessage } from '../../_models/appMessage';
 import { appRoom } from '../../_models/appRoom';
 import { appUser } from '../../_models/appUser';
 
@@ -21,6 +22,7 @@ import { appUser } from '../../_models/appUser';
 export class Room implements OnInit {
   public room : appRoom;
   public me : appUser;
+  public messages : appMessage[];
   constructor(
     private _activeroute: ActivatedRoute,
     private _state: AppState,
@@ -31,6 +33,7 @@ export class Room implements OnInit {
   ngOnInit() {
     this._activeroute.data.forEach((data : any) => {
       if(data.room)this.room = data.room;
+      if(data.messages)this.messages = data.messages;
     });
   }
 }

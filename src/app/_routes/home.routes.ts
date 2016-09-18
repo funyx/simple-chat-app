@@ -2,6 +2,7 @@ import { Home } from '../home/home.component';
 import { Welcome } from '../home/welcome/welcome.component';
 import { Room } from '../home/room/room.component';
 import { RoomResolver } from '../_resolvers/room.resolver';
+import { RoomMessagesResolver } from '../_resolvers/room.messages.resolver';
 
 export const routes = [
   {
@@ -20,7 +21,7 @@ export const routes = [
       {
         path: 'room/:uid',
         component: Room,
-        resolve: { room: RoomResolver }
+        resolve: { room: RoomResolver, messages: RoomMessagesResolver }
       }
     ]
   }

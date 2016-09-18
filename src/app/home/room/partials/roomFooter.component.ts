@@ -1,13 +1,9 @@
-import { Component, Input, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 
-import { AppState } from '../../../_services/app.service';
-import { RoomService } from '../../../_services/room.service';
-
-import { appMessages } from '../../../_models/appMessages';
 import { appRoom } from '../../../_models/appRoom';
 import { appUser } from '../../../_models/appUser';
+import { appMessage } from '../../../_models/appMessage';;
 import { newChatMessage } from './newChatMessage';
 
 @Component({
@@ -52,14 +48,9 @@ import { newChatMessage } from './newChatMessage';
 })
 
 export class roomFooter implements OnInit {
-  @Input() room: Observable<appRoom>;
+  @Input() room: appRoom;
   @Input() me: appUser;
-  constructor(
-
-  ){
-
-  }
-  ngOnInit(){
-
-  }
+  @Input() messages: appMessage[];
+  constructor(){ }
+  ngOnInit(){ }
 }

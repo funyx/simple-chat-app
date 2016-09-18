@@ -1,13 +1,9 @@
-import { Component, Input, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-
-import { AppState } from '../../../_services/app.service';
-import { RoomService } from '../../../_services/room.service';
 
 import { appRoom } from '../../../_models/appRoom';
 import { appUser } from '../../../_models/appUser';
-import { appMessages } from '../../../_models/appMessages';
+import { appMessage } from '../../../_models/appMessage';
 
 @Component({
   selector: 'room-body',
@@ -45,13 +41,11 @@ import { appMessages } from '../../../_models/appMessages';
   `
 })
 export class roomBody implements OnInit {
-  @Input() room: Observable<appRoom>;
+  @Input() room: appRoom;
   @Input() me: appUser;
+  @Input() messages: appMessage[];
   constructor(
-
-  ){
-
-  }
+  ){}
   ngOnInit(){
 
   }

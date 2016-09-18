@@ -1,6 +1,7 @@
 import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { appMessage } from '../../../_models/appMessage';
 import { appRoom } from '../../../_models/appRoom';
 import { appUser } from '../../../_models/appUser';
 
@@ -24,10 +25,11 @@ import { appUser } from '../../../_models/appUser';
 export class roomHeader implements OnInit{
   @Input() room: appRoom;
   @Input() me: appUser;
+  @Input() messages: appMessage[];
   constructor(
   ){
   }
   ngOnInit(){
-    console.log(this.room,this.me);
+    console.log(this.room,this.messages,this.me);
   }
 }

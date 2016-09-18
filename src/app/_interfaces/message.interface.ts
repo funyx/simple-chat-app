@@ -1,10 +1,10 @@
 import { Room } from './room.interface';
 import { User } from './user.interface';
 
-export interface Messages {
+export interface Message {
   id:number;
-  roomUid:string;
-  uid:Room;
+  room:Room;
+  uid:string;
   author:User;
   content:string;
   createdAt:string;
