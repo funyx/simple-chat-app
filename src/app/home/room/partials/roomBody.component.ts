@@ -34,7 +34,7 @@ import { appMessage } from '../../../_models/appMessage';
     <ul class="chat-thread">
     	<li
         *ngFor="let m of messages"
-        [ngClass]="{'me': m.amI(me.id),'not-me': !m.amI(me.id) }"
+        [ngClass]="{'me': m.amI(),'not-me': !m.amI() }"
         >{{m.content}}</li>
     </ul>
   </div>
@@ -47,6 +47,5 @@ export class roomBody implements OnInit {
   constructor(
   ){}
   ngOnInit(){
-
   }
 }

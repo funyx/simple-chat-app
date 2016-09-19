@@ -89,6 +89,9 @@ export class Io {
     this.socket.on('room',(msg)=>{
       console.log('new socket message','room',msg);
     })
+    this.socket.on('message',(msg)=>{
+      console.log('new socket message','room',msg);
+    })
   }
   // turn requests into observables
   public request$( data : SocketRequestInterface ){

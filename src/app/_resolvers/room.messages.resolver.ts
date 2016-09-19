@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import 'rxjs/add/operator/toArray';
+import 'rxjs/add/operator/take';
 
 import { MessageService } from '../_services/message.service';
 import { appMessage } from '../_models/appMessage';
@@ -18,6 +18,6 @@ export class RoomMessagesResolver implements Resolve<Observable<appMessage[]>> {
 
         let observable = this.service.messages$;
         this.service.loadAll(uid);
-        return observable;
+        return observable.take(1);
     }
 }

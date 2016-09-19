@@ -15,10 +15,10 @@ export class RoomResolver implements Resolve<Observable<appRoom>> {
     ) {}
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<appRoom>|any {
         let uid = route.params['uid'];
-
         let observable = this.service.rooms$
           .map(rooms => rooms.find(room => room.uid === uid)).take(1);
         this.service.load(uid);
+        // console.log(this.service.rooms$);
         return observable;
     }
 }

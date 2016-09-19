@@ -13,7 +13,7 @@ import { appUser } from '../_models/appUser';
 
 @Injectable()
 export class MessageService {
-  private _messages$: Subject<appMessage[]>;
+  public _messages$: Subject<appMessage[]>;
   private _messages_count$: Subject<number>;
   private me : appUser;
   private dataStore: {
@@ -41,27 +41,25 @@ export class MessageService {
 
   loadAll(uid:'string',debug:boolean=false) {
     let r = {
-      debug:debug,
-      url:`/rooms/${uid}/messages`,
-      params:{
-        me  :this._appstate.get('me').id
-      }
+      debug : debug,
+      url : `/rooms/${uid}/messages`,
+      params : { me : this.me.id }
     };
     this._io.request$(new SocketRequest(r))
     .map(res => new SocketResponse(res).body.data)
     .subscribe(
-      data => {
+      (data : appMessage[]) => {
         this.dataStore.messages = [];
         data.forEach((message,index)=>{
           if(message.id) this.dataStore.messages.push(new appMessage(message,this.me));
         });
         this._messages_count$.next(this.dataStore.messages.length);
         this._messages$.next(this.dataStore.messages);
-        this._messages$.complete();
+        // this._messages$.complete();
       },
       error => console.log(`Can't load room messages!`),
       // FUCKIN DIGEST THIS SHIT !!!!
-      ()=>{}//this._ref.tick();}
+      () => this._ref.tick()//this._ref.tick();}
     );
   }
 
@@ -86,26 +84,49 @@ export class MessageService {
           if (notFound) {
             this.dataStore.messages.push(data);
           }
+          this._messages_count$.next(this.dataStore.messages.length);
           this._messages$.next(this.dataStore.messages);
+          this._messages$.complete();
+          this._ref.tick();
         },
         error => console.log(`Can't load room message!`),
         // FUCKIN DIGEST THIS SHIT !!!!
-        ()=>{this._ref.tick();}
+        ()=>{return}
       );
   }
 
   create(room: appMessage,debug:boolean=false) {
-    return alert('not implemented');
-    // let r = {
-    //   debug:debug,
-    //   url:`/rooms`,
-    //   params:{me:this._appstate.get('me').id}
-    // };
-    // this._io.socket.post(`/rooms`, JSON.stringify(room))
-    //   .map(response => response.json()).subscribe(data => {
-    //     this.dataStore.messages.push(data);
-    //     this._messages$.next(this.dataStore.messages);
-    //   }, error => console.log('Could not create room.'));
+    let data = room.baseData();
+    let r = {
+      debug:debug,
+      url:`/rooms/${data.roomUid}/messages`,
+      params:data,
+      method:'post'
+    };
+    this._io.request$(new SocketRequest(r))
+      .map(res => new SocketResponse(res).body.data)
+      .subscribe(
+        (message : appMessage) => {
+          let notFound = true;
+          this.dataStore.messages.forEach((item, index) => {
+            if (item.uid === message.uid) {
+              this.dataStore.messages[index] = new appMessage(message,this.me);
+              notFound = false;
+            }
+          });
+          if (notFound) {
+            console.log('the new message is :',new appMessage(message,this.me));
+            this.dataStore.messages.unshift(new appMessage(message,this.me));
+          }
+          this._messages_count$.next(this.dataStore.messages.length);
+          this._messages$.next(this.dataStore.messages);
+          this._messages$.complete();
+          this._ref.tick();
+        },
+        error => console.log('Could not create message.'),
+        // FUCKIN DIGEST THIS SHIT !!!!
+        ()=>{return}
+      );
   }
 
   update(room: appMessage,debug:boolean=false) {

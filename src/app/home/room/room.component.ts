@@ -31,9 +31,18 @@ export class Room implements OnInit {
     this.me = new appUser(this._state.get('me'));
   }
   ngOnInit() {
-    this._activeroute.data.forEach((data : any) => {
-      if(data.room)this.room = data.room;
-      if(data.messages)this.messages = data.messages;
-    });
+    this._activeroute.data.subscribe(
+      (data:any) => {
+        if (data.room) this.room = data.room;
+        if (data.messages) this.messages = data.messages;
+        // console.log(this.room,this.messages);
+      },
+      (err) => {
+          console.log('Room Error: ' , err);
+      },
+      () => {
+          // console.log('Completed');
+      }
+    );
   }
 }

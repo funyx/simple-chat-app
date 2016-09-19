@@ -11,11 +11,13 @@ import { Io, SocketRequest, SocketResponse } from './socket.service';
 import { appRoom } from '../_models/appRoom';
 import { appUser } from '../_models/appUser';
 
+import { Room } from '../_interfaces/room.interface';
+
 @Injectable()
 export class RoomService {
   private _rooms$: Subject<appRoom[]>;
   private _rooms_count$: Subject<number>;
-  private me;
+  private me : appUser;
   private dataStore: {
     rooms: appRoom[],
     rooms_count: number
@@ -40,12 +42,12 @@ export class RoomService {
 
   loadAll(debug:boolean=false) {
     let r = {
-      debug:debug,
-      url:'/rooms',
-      params:{me:this.me.id}
+      debug : debug,
+      url : '/rooms',
+      params : {me:this.me.id}
     };
-    let observable = this._io.request$(new SocketRequest(r))
-    observable.map(res => new SocketResponse(res).body.data)
+    this._io.request$(new SocketRequest(r))
+    .map(res => new SocketResponse(res).body.data)
     .subscribe(
       (data : appRoom[]) => {
         this.dataStore.rooms = [];
@@ -83,6 +85,7 @@ export class RoomService {
             this.dataStore.rooms.push(new appRoom(data,this.me));
           }
           this._rooms$.next(this.dataStore.rooms);
+          // console.log(this._rooms$);
         },
         error => console.log(`Can't load room!`),
         // FUCKIN DIGEST THIS SHIT !!!!
@@ -90,8 +93,9 @@ export class RoomService {
       );
   }
 
-  create(room: any,debug:boolean=false) {
-    return alert('not implemented');
+  create(room: Room,debug:boolean=false) {
+    console.log(room);
+    // return alert('not implemented');
     // let r = {
     //   debug:debug,
     //   url:`/rooms`,
