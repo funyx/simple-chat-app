@@ -11,8 +11,8 @@
     "electron"
   ],
   "main": "./dist/electronApp.js",
-  "author": "Dimitar Dobchev <ddobchev@gmail.com>",
-  "homepage": "https://github.com/funyx/simple-chat-app",
+  "author": "",
+  "homepage": "",
   "license": "MIT",
   "scripts": {
     "electron:prod:mac": "npm run electron:build:mac && npm run electron:pack:mac && npm run electron:image:mac",
